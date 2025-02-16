@@ -27,8 +27,9 @@ export default function Sidebar() {
           <NavItem to='/history' icon="time-past" text="History" />
           <NavItem to='/community' icon="population-globe" text="Community" />
           <NavItem to='/subscription' icon="channel" text="Subscriptions" />
+          <NavItem to='/likedvideo' icon='likevideo' text='Liked Videos' />
         </div>
-        <div className="w-5/6 h-2/12 bg-amber-50">
+        <div className="w-full h-2/12 border-t-2 border-[#3D8D7A] bottom-0 bg-[#B3D8A8]">
         </div>
       </div>
     </>
