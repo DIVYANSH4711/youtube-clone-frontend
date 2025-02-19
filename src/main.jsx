@@ -7,6 +7,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import VideoPage from './components/VideoPage/VideoPage.jsx'
 import Subscriptions from './components/Subsciptions/Subscriptions.jsx'
 import CommunityTab from './components/Community/CommunityTab.jsx'
+import Channel from './components/Channel/Channel.jsx'
 const router = createBrowserRouter([
   {
     path: '/',
@@ -27,6 +28,10 @@ const router = createBrowserRouter([
       {
         path: 'community',
         element: <CommunityTab />,
+      },
+      {
+        path: 'channel/:id',
+        element: <Channel/>
       }
     ]
   }

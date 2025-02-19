@@ -133,7 +133,7 @@ const CommunityTab = () => {
             {/* Close Button */}
             <button
               onClick={() => setIsAddTweetOpen(false)}
-              className="absolute top-2 right-2 text-gray-400 hover:text-white"
+              className="absolute top-2 right-2 text-gray-400 cursor-pointer hover:text-white"
             >
               ✖
             </button>
