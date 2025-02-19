@@ -4,7 +4,9 @@ import './index.css'
 import App from './App.jsx'
 import Home from './components/Home/Home.jsx'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import VideoCard from './components/VideoCard/VideoCard.jsx'
+import VideoPage from './components/VideoPage/VideoPage.jsx'
+import Subscriptions from './components/Subsciptions/Subscriptions.jsx'
+import CommunityTab from './components/Community/CommunityTab.jsx'
 const router = createBrowserRouter([
   {
     path: '/',
@@ -16,7 +18,15 @@ const router = createBrowserRouter([
       },
       {
         path: 'video/:id',
-        element: <VideoCard />,
+        element: <VideoPage />,
+      },
+      {
+        path: 'subscription',
+        element: <Subscriptions />,
+      },
+      {
+        path: 'community',
+        element: <CommunityTab />,
       }
     ]
   }

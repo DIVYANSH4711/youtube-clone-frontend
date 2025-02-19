@@ -1,4 +1,15 @@
-export default function VideoCard({ title = 'Testing', channelName = 'Divyansh', views, uploadDate, thumbnailUrl, channelAvatarUrl }) {
+import React from "react";
+import { NavLink } from "react-router-dom";
+
+export default function VideoCard({ 
+  videoId, // Pass this prop for navigation
+  title = "Testing", 
+  channelName = "Divyansh", 
+  views, 
+  uploadDate, 
+  thumbnailUrl, 
+  channelAvatarUrl 
+}) {
   const formattedViews = new Intl.NumberFormat("en-US", { notation: "compact" }).format(views);
 
   // Function to calculate time ago manually
@@ -24,32 +35,38 @@ export default function VideoCard({ title = 'Testing', channelName = 'Divyansh',
   }
 
   return (
-    <div className="bg-zinc-7 border-1 border-gray-300 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 text-white">
+    <div className="bg-zinc-800 border border-gray-700 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 text-white">
       {/* Thumbnail */}
-      <div className="relative aspect-video p-2 overflow-hidden">
+      <NavLink to={`/video/${videoId}`} className="block relative aspect-video overflow-hidden">
         <img
           src={thumbnailUrl || "/Thumbnail.png"}
           alt={title}
           className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
         />
-      </div>
+      </NavLink>
 
       {/* Video Info */}
       <div className="p-4">
         <div className="flex items-start space-x-3">
           {/* Channel Avatar */}
-          <div className="flex-shrink-0">
+          <NavLink to={`/channel/${channelName}`} className="flex-shrink-0">
             <img
               src={channelAvatarUrl || "/man.gif"}
               alt={channelName}
               className="w-10 h-10 rounded-full cursor-pointer"
             />
-          </div>
+          </NavLink>
 
           {/* Video Details */}
           <div className="flex-1 min-w-0">
-            <h3 className="text-white font-semibold text-sm line-clamp-2 mb-1">{title}</h3>
-            <p className="text-zinc-400 text-sm  hover:underline russo-one-regular cursor-pointer">{channelName}</p>
+            <NavLink to={`/video/${videoId}`} className="block">
+              <h3 className="text-white font-semibold text-sm line-clamp-2  hover:text-red-400 transition-colors duration-200">
+                {title}
+              </h3>
+            </NavLink>
+            <NavLink to={`/channel/${channelName}`} className="text-zinc-400 text-sm hover:underline cursor-pointer">
+              {channelName}
+            </NavLink>
             <p className="text-zinc-500 text-xs">
               {formattedViews} views • {timeAgo(uploadDate)}
             </p>
