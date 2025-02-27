@@ -33,7 +33,7 @@ const Subscriptions = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#1A1F2C] text-white">  
+    <div className="min-h-screen bg-black text-white">  
       <div className="max-w-4xl mx-auto p-6 pt-20">
         {/* Header */}
         <header className="mb-8">
@@ -48,8 +48,8 @@ const Subscriptions = () => {
             channels.map((channel, index) => (
               <div
                 key={channel.id}
-                className={`rounded-lg p-5 flex items-start gap-6 transition-all hover:scale-[1.02] duration-300 ${
-                  index % 2 === 0 ? "bg-[#22242A]" : "bg-[#2A2A2A]"
+                className={`rounded-sm p-5 border-2 border-zinc-200 flex items-start gap-6 transition-all hover:scale-[1.02] duration-300 ${
+                  index % 2 === 0 ? "bg-[#22242A]" : "bg-[#060606]"
                 }`}
               >
                 {/* Channel Avatar */}

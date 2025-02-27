@@ -15,7 +15,7 @@ export default function Sidebar() {
           </button>
         </div>
         <div className="w-5/6 h-8/12 mb-8  p-2">
-          <div className="w-5/6 h-1/8 bg-[#1D1616] border border-[#c0c0c0] rounded-full text-sm flex justify-center pr-5 pl-2 russo-one-regular mb-1 space-x-3 items-center cursor-pointer text-white 
+          <div className="w-5/6 h-1/8 bg-[#1D1616] border border-[#c0c0c0] rounded-full text-sm flex justify-center   russo-one-regular mb-1 space-x-3 items-center cursor-pointer text-white 
     hover:scale-105 transition-transform duration-200">
 
             <img src="/plus.svg" alt="upload" className="h-4/7 invert transition-transform duration-200 hover:scale-110" />
@@ -27,7 +27,7 @@ export default function Sidebar() {
           <NavItem to='/history' icon="time-past" text="History" />
           <NavItem to='/community' icon="population-globe" text="Community" />
           <NavItem to='/subscription' icon="channel" text="Subscriptions" />
-          <NavItem to='/likedvideo' icon='likevideo' text='Liked Videos' />
+          <NavItem to='/liked-videos' icon='likevideo' text='Liked Videos' />
         </div>
         <div className="w-full h-2/12  border-t-1 border-gray-300 bottom-0 flex flex-col justify-around bg-black">
           <div className="w-full h-2/3 flex items-center justify-between">
