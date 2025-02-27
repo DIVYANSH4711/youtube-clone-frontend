@@ -11,15 +11,8 @@ import Channel from "./components/Channel/Channel.jsx";
 import LikeVideo from "./components/LikeVideo/LikeVideo.jsx";
 import Login from "./components/Authentication/Login.jsx";
 import Register from "./components/Authentication/Register.jsx";
-
-
-import { Navigate, Outlet } from "react-router-dom";
-const ProtectedRoute = () => {
-  const isAuthenticated = localStorage.getItem("token"); // Check if user is logged in
-
-  return isAuthenticated ? <Outlet /> : <Navigate to="/auth/login" />;
-};
-
+import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute.jsx";
+import WatchHistory from "./components/WatchHistory/WatchHistory.jsx";
 
 const router = createBrowserRouter([
   {
@@ -39,6 +32,7 @@ const router = createBrowserRouter([
       { path: "community", element: <CommunityTab /> },
       { path: "channel/:id", element: <Channel /> },
       { path: "liked-videos", element: <LikeVideo /> },
+      { path: "watch-history", element: <WatchHistory /> },
     ],
   },
 ]);

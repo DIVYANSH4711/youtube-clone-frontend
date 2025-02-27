@@ -18,8 +18,7 @@ export default function Login() {
     "Binge-worthy content, just a click away!",
     "Create. Share. Shine."
   ];
-
-  useEffect(() => {
+  function AnimationtagLine() {
     let currentTagline = taglines[taglineIndex];
     let charIndex = 0;
     let typingSpeed = 100; // Adjust typing speed
@@ -50,7 +49,10 @@ export default function Login() {
     };
 
     typeText();
-  }, [taglineIndex]); // Run effect when taglineIndex changes
+  }
+  useEffect(() => {
+    AnimationtagLine();
+  }, [taglineIndex]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -75,22 +77,22 @@ export default function Login() {
           </h2>
           <form className="mt-6 space-y-6" onSubmit={handleSubmit}>
             <div className="space-y-4">
-               <input
-                 type="username"
-                 placeholder="username"
-                 className="w-full px-4 py-2 border border-gray-600 bg-gray-800 text-white rounded-md focus:ring focus:ring-red-500"
-                 value={username}
-                 onChange={(e) => setUsername(e.target.value)}
-                 required
-               />
-               <input
-                 type="email"
-                 placeholder="Email"
-                 className="w-full px-4 py-2 border border-gray-600 bg-gray-800 text-white rounded-md focus:ring focus:ring-red-500"
-                 value={email}
-                 onChange={(e) => setEmail(e.target.value)}
-                 required
-               />
+              <input
+                type="username"
+                placeholder="username"
+                className="w-full px-4 py-2 border border-gray-600 bg-gray-800 text-white rounded-md focus:ring focus:ring-red-500"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                required
+              />
+              <input
+                type="email"
+                placeholder="Email"
+                className="w-full px-4 py-2 border border-gray-600 bg-gray-800 text-white rounded-md focus:ring focus:ring-red-500"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
               <input
                 type="password"
                 placeholder="Password"
@@ -121,3 +123,5 @@ export default function Login() {
     </div>
   );
 }
+
+
