@@ -7,16 +7,28 @@ const ProtectedRoute = () => {
 
   useEffect(() => {
     const checkAuth = async () => {
-      const token = localStorage.getItem("token");
-      if (!token) return setIsAuthenticated(false);
+      const token = localStorage.getItem("accessToken");
+      console.log("Token in ProtectedRoute:", token);
+
+      if (!token) {
+        console.log("No token found, redirecting...");
+        setIsAuthenticated(false);
+        return;
+      }
 
       try {
-        const response = await axios.get("/api/auth/validate", {
-          headers: { Authorization: `Bearer ${token}` },
-          withCredentials: true, 
-        });
-        setIsAuthenticated(response.data.valid);
+        const response = await axios.get(
+          `${import.meta.env.VITE_API_URL}/users/current-user`,
+          {
+            headers: { Authorization: `Bearer ${token}` },
+            withCredentials: true,
+          }
+        );
+
+        console.log("Auth API Response:", response.data);
+        setIsAuthenticated(!!response.data?.data); 
       } catch (error) {
+        console.error("Auth check failed:", error);
         setIsAuthenticated(false);
       }
     };
@@ -24,7 +36,10 @@ const ProtectedRoute = () => {
     checkAuth();
   }, []);
 
-  if (isAuthenticated === null) return <p>Loading...</p>; // Prevent flashing
+  console.log("isAuthenticated:", isAuthenticated);
+
+  if (isAuthenticated === null) return <p>Loading...</p>; // Prevents flickering
+
   return isAuthenticated ? <Outlet /> : <Navigate to="/auth/login" />;
 };
 

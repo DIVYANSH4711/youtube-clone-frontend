@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export default function Register() {
-
+   const navigate = useNavigate();
    const [formData, setFormData] = useState({
       username: "",
       email: "",
@@ -47,13 +48,14 @@ export default function Register() {
             userData.append(key, formData[key]);
          });
 
-         const response = await axios.post("http://localhost:5000/api/auth/register", userData, {
+         const response = await axios.post(`${import.meta.env.VITE_API_URL}/api/v1/users/register`, userData, {
             headers: { "Content-Type": "multipart/form-data" },
          });
 
          console.log("User registered:", response.data);
          setLoading(false);
          setError("");
+         navigate("/u/");
       } catch (err) {
          setError(err.response?.data?.message || "Something went wrong");
          setLoading(false);
@@ -158,7 +160,7 @@ export default function Register() {
          </div>
 
          {/* Right Section - Branding / Animated Tagline */}
-         <div className="hidden md:flex flex-1 bg-violet-700 items-center justify-center p-10">
+         <div className="hidden md:flex flex-1 bg-yellow-500 items-center justify-center p-10">
             <h1 className="text-3xl font-extrabold text-gray-800">
                Stream. Watch. Repeat.
             </h1>
