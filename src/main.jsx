@@ -24,7 +24,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/u/",
-    element: <ProtectedRoute />, // Protect everything inside "/u/"
+    element: <ProtectedRoute />, 
     children: [
       { path: "", element: <App /> },
       { path: "video/:id", element: <VideoPage /> },

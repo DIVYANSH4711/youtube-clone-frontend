@@ -4,6 +4,7 @@ import axios from "axios";
 
 const ProtectedRoute = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(null);
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
     const checkAuth = async () => {
@@ -26,7 +27,8 @@ const ProtectedRoute = () => {
         );
 
         console.log("Auth API Response:", response.data);
-        setIsAuthenticated(!!response.data?.data); 
+        setIsAuthenticated(!!response.data?.data);
+        setUser(response.data?.data || {}); 
       } catch (error) {
         console.error("Auth check failed:", error);
         setIsAuthenticated(false);
@@ -36,9 +38,13 @@ const ProtectedRoute = () => {
     checkAuth();
   }, []);
 
+  useEffect(() => {
+    console.log("Updated User in ProtectedRoute:", user);
+  }, [user]); 
+
   console.log("isAuthenticated:", isAuthenticated);
 
-  if (isAuthenticated === null) return <p>Loading...</p>; // Prevents flickering
+  if (isAuthenticated === null) return <p>Loading...</p>;
 
   return isAuthenticated ? <Outlet /> : <Navigate to="/auth/login" />;
 };
