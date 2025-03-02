@@ -84,7 +84,7 @@ export default function Login() {
       localStorage.setItem("refreshToken", refreshToken);
       localStorage.setItem("user", JSON.stringify(user));
 
-      navigate("/u/");
+      navigate("/u/home");
     } catch (error) {
       console.error("Login error:", error);
       setError(error.response?.data?.message || error.message || "Something went wrong");

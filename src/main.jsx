@@ -24,15 +24,21 @@ const router = createBrowserRouter([
   },
   {
     path: "/u/",
-    element: <ProtectedRoute />, 
+    element: <ProtectedRoute />,
     children: [
-      { path: "", element: <App /> },
-      { path: "video/:id", element: <VideoPage /> },
-      { path: "subscription", element: <Subscriptions /> },
-      { path: "community", element: <CommunityTab /> },
-      { path: "channel/:id", element: <Channel /> },
-      { path: "liked-videos", element: <LikeVideo /> },
-      { path: "watch-history", element: <WatchHistory /> },
+      {
+        path: "",
+        element: <App />,
+        children: [
+          { path: "home", element: <Home /> }, 
+          { path: "video/:id", element: <VideoPage /> },
+          { path: "subscription", element: <Subscriptions /> },
+          { path: "community", element: <CommunityTab /> },
+          { path: "channel/:id", element: <Channel /> },
+          { path: "liked-videos", element: <LikeVideo /> },
+          { path: "watch-history", element: <WatchHistory /> },
+        ],
+      },
     ],
   },
 ]);

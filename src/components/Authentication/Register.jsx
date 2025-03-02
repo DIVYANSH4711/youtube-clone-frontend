@@ -55,7 +55,7 @@ export default function Register() {
          console.log("User registered:", response.data);
          setLoading(false);
          setError("");
-         navigate("/u/");
+         navigate("/u/home");
       } catch (err) {
          setError(err.response?.data?.message || "Something went wrong");
          setLoading(false);

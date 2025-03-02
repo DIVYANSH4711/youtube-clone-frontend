@@ -1,50 +1,81 @@
-import { Link, NavLink } from "react-router-dom";
+import { NavLink, useOutletContext, useNavigate } from "react-router-dom";
 import NavItem from "../NavItem/NavItem";
-
+import axios from "axios";
 
 export default function Sidebar() {
+  const { user } = useOutletContext();
+  const navigate = useNavigate(); 
+
+  const handleLogout = async () => {
+    try {
+      await axios.post(
+        `${import.meta.env.VITE_API_URL}/users/logout`,
+        {},
+        { withCredentials: true }
+      );
+      localStorage.removeItem("accessToken");
+      localStorage.removeItem("refreshToken");
+      localStorage.removeItem("user");
+      navigate("/auth/login");
+    } catch (err) {
+      console.error("Logout failed:", err);
+    }
+  };
+
   return (
-    <>
-      <div className="bg-black border-r-1 flex flex-col items-center  border-gray-300 h-screen">
-        <div className="mt-2 mb-5 flex  items-center pl-4 justify-between w-5/6 h-1/12">
-          <NavLink to='/' className="w-1/2 h-full flex items-center justify-start">
-            <img src="/logo.gif" alt="logo" className="h-8/10 invert " />
-          </NavLink>
-          <button className="h-5/10">
-            <img src="/sidebar.svg" alt="sidebar-flip" className="h-full invert cursor-pointer" />
-          </button>
-        </div>
-        <div className="w-5/6 h-8/12 mb-8  p-2">
-          <div className="w-5/6 h-1/8 bg-[#1D1616] border border-[#c0c0c0] rounded-full text-sm flex justify-center   russo-one-regular mb-1 space-x-3 items-center cursor-pointer text-white 
-    hover:scale-105 transition-transform duration-200">
+    <div className="flex flex-col items-center h-full bg-black border-r border-zinc-400 shadow-md relative">
+      {/* Logo & Toggle */}
+      <div className="mt-4 mb-5 flex justify-between items-center w-5/6">
+        <NavLink to="/u/home" className="w-1/2 flex items-center ml-4">
+          <img src="/logo.gif" alt="logo" className="h-8 invert" />
+        </NavLink>
+        <button className="p-2 rounded-md bg-black">
+          <img src="/sidebar.svg" alt="sidebar-flip" className="h-6 invert" />
+        </button>
+      </div>
 
-            <img src="/plus.svg" alt="upload" className="h-4/7 invert transition-transform duration-200 hover:scale-110" />
-
-            <div>UPLOAD</div>
-          </div>
-          <div className="w-6/6 border-1 border-gray-300 my-2" />
-          <NavItem to='/' icon="home" text="Home" />
-          <NavItem to='/history' icon="time-past" text="History" />
-          <NavItem to='/community' icon="population-globe" text="Community" />
-          <NavItem to='/subscription' icon="channel" text="Subscriptions" />
-          <NavItem to='/liked-videos' icon='likevideo' text='Liked Videos' />
-        </div>
-        <div className="w-full h-2/12  border-t-1 border-gray-300 bottom-0 flex flex-col justify-around bg-black">
-          <div className="w-full h-2/3 flex items-center justify-between">
-            <div className="flex items-center space-x-2 pl-2">
-              <img src="/man.gif" alt="avatar" className="w-1/5 rounded-full cursor-pointer" />
-              <div className="flex flex-col py-1">
-                <div className="h-2/3 text-zinc-200 text-sm hover:underline cursor-pointer">Divyansh Kashyap</div>
-                <div className="h-1/3 text-zinc-400 text-sm">@duvyansh728</div>
-              </div>
-            </div>
-          </div>
-          <div className="w-full h-1/3 bg-[#B80000] text-lg font-bold hover:underline flex items-center justify-center">
-            Logout
-            <img src="/logout.svg" alt="logout" className="h-2/6 pl-1" />
-          </div>
+      {/* Upload Button */}
+      <div className="w-5/6">
+        <div className="w-full flex justify-center items-center bg-gradient-to-r from-gray-800 to-gray-700 border border-gray-600 text-white text-sm py-2 rounded-full shadow-md hover:scale-105 transition-transform cursor-pointer">
+          <img src="/plus.svg" alt="upload" className="h-5 invert" />
+          <span className="ml-2">UPLOAD</span>
         </div>
       </div>
-    </>
+
+      {/* Silver Lining Divider */}
+      <div className="w-5/6 border-t border-gray-500 my-4 opacity-50" />
+
+      {/* Navigation */}
+      <div className="w-full px-4 space-y-2 flex-grow">
+        <NavItem to="/u/home" icon="home" text="Home" />
+        <NavItem to="/u/history" icon="time-past" text="History" />
+        <NavItem to="/u/community" icon="population-globe" text="Community" />
+        <NavItem to="/u/subscription" icon="channel" text="Subscriptions" />
+        <NavItem to="/u/liked-videos" icon="likevideo" text="Liked Videos" />
+      </div>
+
+      {/* User Profile */}
+      <div className="absolute bottom-4 border-t border-zinc-400 left-0 w-full px-4 pt-2">
+        <div className="flex items-center space-x-3">
+          <img
+            src={user.avatar || "/man.gif"}
+            alt="avatar"
+            className="w-12 h-12 rounded-full border border-gray-600 shadow-md"
+          />
+          <div>
+            <p className="text-white font-semibold chakra-petch-medium text-lg">{user.fullName}</p>
+            <p className="text-gray-400 chakra-petch-medium text-sm">@{user.username}</p>
+          </div>
+        </div>
+
+        {/* Logout Button */}
+        <button 
+          onClick={handleLogout}
+          className="mt-3 w-full py-2 text-white rounded-full border border-gray-500 shadow-md bg-gradient-to-r from-red-700 via-red-600 to-red-500 hover:from-red-600 hover:to-red-400 transition-all flex items-center justify-center space-x-2">
+          <span className="text-sm font-semibold">Logout</span>
+          <img src="/logout.svg" alt="logout" className="h-4 invert" />
+        </button>
+      </div>
+    </div>
   );
 }
