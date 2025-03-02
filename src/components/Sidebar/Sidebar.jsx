@@ -8,11 +8,18 @@ export default function Sidebar() {
 
   const handleLogout = async () => {
     try {
+      console.log("Logging out...", `${import.meta.env.VITE_API_URL}/users/logout`);
       await axios.post(
         `${import.meta.env.VITE_API_URL}/users/logout`,
         {},
-        { withCredentials: true }
+        {
+          withCredentials: true, 
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("accessToken")}`
+          }
+        }
       );
+      
       localStorage.removeItem("accessToken");
       localStorage.removeItem("refreshToken");
       localStorage.removeItem("user");

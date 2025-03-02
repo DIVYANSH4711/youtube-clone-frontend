@@ -2,7 +2,7 @@ import { useState } from "react";
 
 const SearchBar = ({ onSearch, placeholder = "Search..." }) => {
   return (
-    <form className="relative w-2/4 bg-black border border-zinc-600 rounded-full flex items-center shadow-md">
+    <form className="relative w-3/5 bg-black border border-zinc-600 rounded-full flex items-center shadow-md">
       {/* Input Field */}
       <input
         type="text"
