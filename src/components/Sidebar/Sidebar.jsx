@@ -43,7 +43,7 @@ export default function Sidebar() {
 
       {/* Upload Button */}
       <div className="w-5/6">
-        <div className="w-full flex justify-center items-center bg-gradient-to-r from-gray-800 to-gray-700 border border-gray-600 text-white text-sm py-2 rounded-full shadow-md hover:scale-105 transition-transform cursor-pointer">
+        <div className="w-full flex justify-center items-center bg-zinc-800 border border-gray-600 text-white text-sm py-2 rounded-full shadow-md hover:scale-105 transition-transform cursor-pointer">
           <img src="/plus.svg" alt="upload" className="h-5 invert" />
           <span className="ml-2">UPLOAD</span>
         </div>
@@ -78,9 +78,8 @@ export default function Sidebar() {
         {/* Logout Button */}
         <button 
           onClick={handleLogout}
-          className="mt-3 w-full py-2 text-white rounded-full border border-gray-500 shadow-md bg-gradient-to-r from-red-700 via-red-600 to-red-500 hover:from-red-600 hover:to-red-400 transition-all flex items-center justify-center space-x-2">
-          <span className="text-sm font-semibold">Logout</span>
-          <img src="/logout.svg" alt="logout" className="h-4 invert" />
+          className="w-full bg-red-600 hover:bg-red-700 cursor-pointer text-white py-2 rounded-md mt-4 flex items-center justify-center">
+          <span className="text-sm chakra-petch-semibold font-semibold">Logout</span>
         </button>
       </div>
     </div>

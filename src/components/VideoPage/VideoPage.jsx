@@ -44,7 +44,7 @@ const VideoPage = ({ avatar }) => {
                            </div>
                         </div>
                         <div className="flex items-center space-x-4">
-                           {/* ✅ Fixed Subscribe Button */}
+
                            <button
                               className={`relative overflow-hidden border-2 border-zinc-400 cursor-pointer flex items-center font-bold space-x-2 px-8 py-2 rounded-lg transition-all duration-500 ${isSubscribed
                                     ? "text-white before:absolute before:inset-0 before:bg-red-600 before:w-0 before:h-full before:transition-all before:duration-500 before:hover:w-full"

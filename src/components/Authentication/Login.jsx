@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom"; 
 
 export default function Login() {
-  console.log(`VITE_API_URL: ${import.meta.env.VITE_API_URL}`);
+  // console.log(`VITE_API_URL: ${import.meta.env.VITE_API_URL}`);
 
   const navigate = useNavigate();
   const [email, setEmail] = useState("");

@@ -6,7 +6,7 @@ const SearchBar = ({ onSearch, placeholder = "Search..." }) => {
       {/* Input Field */}
       <input
         type="text"
-        className="w-full bg-transparent px-4 py-2 text-white placeholder-gray-400 outline-none"
+        className="w-full bg-transparent px-8  text-white placeholder-gray-400 outline-none"
         placeholder={placeholder}
       />
       
