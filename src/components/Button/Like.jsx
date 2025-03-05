@@ -1,14 +1,11 @@
 export default function Like({ likes }) {
-   return (
-     <div className="border-2 border-zinc-300 py-1 px-2 rounded-full flex items-center  justify-centerw-full h-8/10 space-x-2">
-       <button className="w-7/10 h-4/5 flex items-center space-x-1 border-r-2 pr-3 cursor-pointer text-gray-400 ">
-         <img src="/like.png" alt="like" className="h-5 w-5 cursor-pointer" />
-         <span>{likes}</span>
-       </button>
-       <button className="text-gray-400 ">
-         <img src="/dislike.png" alt="dislike" className="h-5 w-5 cursor-pointer" />
-       </button>
-     </div>
-   );
- }
- 
+  return (
+    <div className="border-2 border-zinc-300 py-2 px-2 rounded-full flex items-center justify-center h-6 space-x-2 bg-white shadow-md cursor-pointer">
+      <button className="flex items-center py-1 space-x-2 text-gray-600 font-medium hover:text-blue-500 transition cursor-pointer">
+        {/* Professional Thumbs-up SVG */}
+        <img src="/Like.svg" alt="Like" className="" />
+        <span>{likes}</span>
+      </button>
+    </div>
+  );
+}
