@@ -14,7 +14,7 @@ const Tweet = ({ author, content, timestamp, likes, avatar }) => {
       <div className="flex items-start space-x-3">
         {/* Avatar */}
         <img src={avatar} alt={author} className="w-10 h-10 rounded-full object-cover flex-shrink-0" />
-        
+
         <div className="flex-1 min-w-0">
           {/* Author & Timestamp */}
           <div className="flex items-center space-x-2">
@@ -31,9 +31,8 @@ const Tweet = ({ author, content, timestamp, likes, avatar }) => {
           <div className="flex items-center space-x-6 mt-4">
             <button
               onClick={handleLike}
-              className={`flex items-center space-x-2 transition-colors ${
-                isLiked ? "text-red-500" : "text-gray-400 hover:text-red-500"
-              }`}
+              className={`flex items-center space-x-2 transition-colors ${isLiked ? "text-red-500" : "text-gray-400 hover:text-red-500"
+                }`}
             >
               {/* Heart Icon - Preventing Image Distortion */}
               <div className="w-6 h-6 flex items-center justify-center cursor-pointer">

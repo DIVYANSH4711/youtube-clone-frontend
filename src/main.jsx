@@ -34,7 +34,7 @@ const router = createBrowserRouter([
           { path: "video/:id", element: <VideoPage /> },
           { path: "subscription", element: <Subscriptions /> },
           { path: "community", element: <CommunityTab /> },
-          { path: "channel/:id", element: <Channel /> },
+          { path: "channel/:username", element: <Channel /> },
           { path: "liked-videos", element: <LikeVideo /> },
           { path: "watch-history", element: <WatchHistory /> },
         ],

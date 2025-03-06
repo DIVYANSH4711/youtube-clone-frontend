@@ -1,16 +1,70 @@
 import Like from "../Button/Like";
 import Comment from "./Comment";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import axios from "axios";
 
-const commentsData = [
-   { id: 1, username: "John Doe", timeAgo: "2 days ago", text: "Great video!", likes: 1200 },
-   { id: 2, username: "Jane Smith", timeAgo: "1 day ago", text: "Really helpful, thanks!", likes: 850 },
-   { id: 3, username: "Alex", timeAgo: "5 hours ago", text: "Amazing content!", likes: 300 },
-];
 
 const VideoPage = ({ avatar }) => {
    const [isSubscribed, setIsSubscribed] = useState(false);
+   const [videoData, setVideoData] = useState({});
+   const [comments, setComments] = useState([]);
+   const [commentsData, setCommentsData] = useState([]);
+   const [limitVideo, setLimitVideo] = useState(10);
+   const [PageVideo, setPageVideo] = useState(1);
+   const [PageComment, setPageComment] = useState(1);
+   const [limitComments, setLimitComments] = useState(10);
+   const { id } = useParams();
+   const fetchVideoData = async () => {
+      try {
+         const response = await axios.get(
+            `${import.meta.env.VITE_API_URL}/videos/${id}`,
+            {
+               withCredentials: true,
+               headers: {
+                  Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+               },
+            }
+         );
+         if (!response.data || !response.data.data) {
+            throw new Error("Invalid server response");
+         }
+         setVideoData({ ...videoData, ...response.data.data });
+         setPageVideo(PageVideo + 1);
+      } catch (error) {
+         console.error("Video fetch failed:", error);
+      }
+   }
+   const fetchCommentsData = async () => {
+      try {
+         const response = await axios.get(
+            `${import.meta.env.VITE_API_URL}/comments/${id}`,
+            {
+               query: {
+                  limit: limitComments,
+                  page: PageComment,
+               },
+               withCredentials: true,
+               headers: {
+                  Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+               },
+            }
+         );
+         if (!response.data || !response.data.data) {
+            throw new Error("Invalid server response");
+         }
+         setCommentsData(response.data.data);
+         setComments([...comments, ...response.data.data.comments]);
+         setPageComment(PageComment + 1);
+      } catch (error) {
+         console.error("Comments fetch failed:", error);
+      }
+   }
 
+   useEffect(() => {
+      fetchVideoData();
+      fetchCommentsData();
+   }, []);
    return (
       <div className="min-h-screen bg-[#0F0F0F] text-white p-4">
          <div className="max-w-[1800px] mx-auto">
@@ -47,8 +101,8 @@ const VideoPage = ({ avatar }) => {
 
                            <button
                               className={`relative overflow-hidden border-2 border-zinc-400 cursor-pointer flex items-center font-bold space-x-2 px-8 py-2 rounded-lg transition-all duration-500 ${isSubscribed
-                                    ? "text-white before:absolute before:inset-0 before:bg-red-600 before:w-0 before:h-full before:transition-all before:duration-500 before:hover:w-full"
-                                    : "bg-white text-black hover:bg-red-500 hover:text-white"
+                                 ? "text-white before:absolute before:inset-0 before:bg-red-600 before:w-0 before:h-full before:transition-all before:duration-500 before:hover:w-full"
+                                 : "bg-white text-black hover:bg-red-500 hover:text-white"
                                  }`}
                               onClick={() => setIsSubscribed(!isSubscribed)}
                            >
@@ -80,15 +134,19 @@ const VideoPage = ({ avatar }) => {
                      </div>
 
                      <div className="space-y-4">
-                        {commentsData.map((comment) => (
-                           <Comment
-                              key={comment.id}
-                              username={comment.username}
-                              timeAgo={comment.timeAgo}
-                              text={comment.text}
-                              likes={comment.likes}
-                           />
-                        ))}
+                        {
+                           
+                           comments ?
+                              <p className="text-gray-400 text-center">No comments yet.</p> :
+                              commentsData.comments.map((comment) => (
+                                 <Comment
+                                    key={comment.id}
+                                    username={comment.username}
+                                    timeAgo={comment.timeAgo}
+                                    text={comment.text}
+                                    likes={comment.likes}
+                                 />
+                              ))}
                      </div>
                   </div>
                </div>

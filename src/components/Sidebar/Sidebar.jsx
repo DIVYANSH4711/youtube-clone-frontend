@@ -70,7 +70,12 @@ export default function Sidebar() {
             className="w-12 h-12 rounded-full border border-gray-600 shadow-md"
           />
           <div>
-            <p className="text-white font-semibold chakra-petch-medium text-lg">{user.fullName}</p>
+            <p 
+              className="text-white hover:underline cursor-pointer font-semibold chakra-petch-medium text-lg"
+              onClick={() => navigate(`/u/channel/${user.username}`)}
+            >
+              {user.fullName}
+            </p>
             <p className="text-gray-400 chakra-petch-medium text-sm">@{user.username}</p>
           </div>
         </div>
