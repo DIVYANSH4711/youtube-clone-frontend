@@ -10,7 +10,11 @@ export default defineConfig({
   ],
   server: {
     proxy: {
-      '/main': 'https://youtube-clone-by-divyansh-kashyap.onrender.com',
+      '/main': {
+        target: 'https://youtube-clone-by-divyansh-kashyap.onrender.com/api/v1',
+        secure: true,
+        changeOrigin: true
+      }
     },
   },
 })

@@ -10,7 +10,7 @@ const Tweet = ({ author, content, timestamp, likes, avatar }) => {
   };
 
   return (
-    <div className="bg-zinc-700 rounded-xl p-4 border border-gray-700 transition-colors w-full max-w-full">
+    <div className="bg-black rounded-xl p-4 border-2 border-zinc-700 transition-colors w-full max-w-full">
       <div className="flex items-start space-x-3">
         {/* Avatar */}
         <img src={avatar} alt={author} className="w-10 h-10 rounded-full object-cover flex-shrink-0" />
@@ -23,7 +23,7 @@ const Tweet = ({ author, content, timestamp, likes, avatar }) => {
           </div>
 
           {/* Tweet Content */}
-          <div className="mt-2 text-black p-2 rounded-sm font-bold break-words bg-orange-200 w-full">
+          <div className="mt-2 text-white p-2 rounded-sm font-bold break-words w-full">
             {content}
           </div>
 

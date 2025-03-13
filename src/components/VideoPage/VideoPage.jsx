@@ -65,7 +65,7 @@ const VideoPage = () => {
    }, []);
    useEffect(() => {
       fetchCommentsData();
-   }, [comments])
+   }, [])
 
    const handleAddComment = async () => {
       if (!commentText.trim()) return;
@@ -277,7 +277,7 @@ const VideoPage = () => {
                                  updatedAt={formatDate(comment?.updatedAt || "")}
                                  text={comment.content || ""}
                                  likes={comment.likes || 0}
-                                 userLiked={comment.isLiked}
+                                 userLiked={comment.isLiked || false}
                                  userAvatar={comment.owner?.avatar || ""}
                               />
                            ))
@@ -315,3 +315,5 @@ const VideoPage = () => {
 };
 
 export default VideoPage;
+
+

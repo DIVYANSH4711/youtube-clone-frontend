@@ -9,6 +9,7 @@ export default function Channel() {
   const [channelData, setChannelData] = useState({});
   const [videoData, setVideoData] = useState([]);
   const [tweetData, setTweetData] = useState([]);
+  const [isSubscribed, setIsSubscribed] = useState(false);
   const params = useParams();
   const username = params.username;
   const fetchChannelData = async () => {
@@ -25,7 +26,8 @@ export default function Channel() {
       if (!response.data || !response.data.data) {
         throw new Error("Invalid server response");
       }
-      setChannelData({...channelData, ...response.data.data});
+      setChannelData({ ...channelData, ...response.data.data });
+      setIsSubscribed(response.data.data.isSubscribed);
     } catch (error) {
       console.error("Channel fetch failed:", error);
     }
@@ -54,7 +56,7 @@ export default function Channel() {
   const fetchTweetData = async () => {
     try {
       const response = await axios.get(
-        `${import.meta.env.VITE_API_URL}/tweets/user/${username}`, 
+        `${import.meta.env.VITE_API_URL}/tweets/user/${username}`,
         {
           withCredentials: true,
           headers: {
@@ -83,6 +85,38 @@ export default function Channel() {
       fetchTweetData();
     }
   }, [activeTab]);
+
+  const handleToggleSubscription = async () => {
+    try {
+      const response = await axios.post(
+        `${import.meta.env.VITE_API_URL}/subscriptions/c/${channelData._id}`,
+        {},
+        {
+          withCredentials: true,
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+          },
+        }
+      );
+      if (!response.data || !response.data.data) {
+        throw new Error("Invalid server response");
+      }
+      setIsSubscribed(!isSubscribed);
+      if (isSubscribed) {
+        setChannelData((prev) => ({
+          ...prev,
+          totalSubscribers: prev.totalSubscribers - 1,
+        }));
+      } else {
+        setChannelData((prev) => ({
+          ...prev,
+          totalSubscribers: prev.totalSubscribers + 1,
+        }));
+      }
+    } catch (error) {
+      console.error("Failed to subscribe:", error);
+    }
+  }
   return (
     <div className="min-h-screen w-full bg-black text-white overflow-y-auto">
       {/* Banner Section */}
@@ -94,11 +128,19 @@ export default function Channel() {
         {/* Profile Section */}
         <div className="flex items-center gap-6 py-6">
           <div className="w-24 h-24 rounded-full bg-black flex items-center justify-center">
-              <img src={channelData.avatar} alt="" className="h-full w-full rounded-full"/>
+            <img src={channelData.avatar} alt="" className="h-full w-full rounded-full" />
           </div>
           <div>
             <h1 className=" big-shoulders-stencil-Big-Shoulders-Stencil text-4xl">{channelData.fullName}</h1>
             <p className="text-gray-400 text-sm">{channelData.totalSubscribers} Subscribers • {channelData.totalVideos} Videos</p>
+          </div>
+          <div>
+            <button
+              className={`py-1 px-2 border-2 cursor-pointer font-bold rounded-md ${isSubscribed ? "bg-black text-white border-white" : "bg-red-600 text-black border-white"} `}
+              onClick={handleToggleSubscription}
+            >
+              {isSubscribed ? "Subscribed" : "Subscribe"}
+            </button>
           </div>
         </div>
 
@@ -106,28 +148,26 @@ export default function Channel() {
         <div className="flex gap-4 mb-6 border-b border-gray-700">
           <button
             onClick={() => setActiveTab("videos")}
-            className={`px-4 py-2 transition-colors ${
-              activeTab === "videos"
+            className={`px-4 py-2 transition-colors ${activeTab === "videos"
                 ? "border-b-2 border-white text-white"
                 : "text-gray-400 hover:text-white"
-            }`}
+              }`}
           >
             Videos
           </button>
           <button
             onClick={() => setActiveTab("tweets")}
-            className={`px-4 py-2 transition-colors ${
-              activeTab === "tweets"
+            className={`px-4 py-2 transition-colors ${activeTab === "tweets"
                 ? "border-b-2 border-white text-white"
                 : "text-gray-400 hover:text-white"
-            }`}
+              }`}
           >
             Tweets
           </button>
         </div>
 
         {/* Content Section */}
-        {activeTab === "videos" ? <VideoGrid videos={videoData} /> : <TweetList tweets={tweetData}/>}
+        {activeTab === "videos" ? <VideoGrid videos={videoData} /> : <TweetList tweets={tweetData} />}
       </div>
     </div>
   );
