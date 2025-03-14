@@ -24,7 +24,7 @@
               uploadDate={video.uploadDate}
               likes={video.likes}
             />
-          ))
+          )) 
        }
      </div>
    );

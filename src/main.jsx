@@ -13,6 +13,7 @@ import Login from "./components/Authentication/Login.jsx";
 import Register from "./components/Authentication/Register.jsx";
 import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute.jsx";
 import WatchHistory from "./components/WatchHistory/WatchHistory.jsx";
+import ByPass from "./Utilities/ByPass.jsx"
 
 const router = createBrowserRouter([
   {
@@ -41,6 +42,10 @@ const router = createBrowserRouter([
       },
     ],
   },
+  {
+    path: "/",
+    element: <ByPass />
+  }
 ]);
 
 createRoot(document.getElementById("root")).render(

@@ -48,7 +48,7 @@ export default function Register() {
             userData.append(key, formData[key]);
          });
 
-         const response = await axios.post(`${import.meta.env.VITE_API_URL}/api/v1/users/register`, userData, {
+         const response = await axios.post(`${import.meta.env.VITE_API_URL}/users/register`, userData, {
             headers: { "Content-Type": "multipart/form-data" },
          });
 

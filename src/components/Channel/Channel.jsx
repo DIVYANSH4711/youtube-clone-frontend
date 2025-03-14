@@ -128,7 +128,7 @@ export default function Channel() {
         {/* Profile Section */}
         <div className="flex items-center gap-6 py-6">
           <div className="w-24 h-24 rounded-full bg-black flex items-center justify-center">
-            <img src={channelData.avatar} alt="" className="h-full w-full rounded-full" />
+            <img src={channelData.avatar} alt="" className="h-4/5 w-4/5 rounded-full" />
           </div>
           <div>
             <h1 className=" big-shoulders-stencil-Big-Shoulders-Stencil text-4xl">{channelData.fullName}</h1>
@@ -167,7 +167,7 @@ export default function Channel() {
         </div>
 
         {/* Content Section */}
-        {activeTab === "videos" ? <VideoGrid videos={videoData} /> : <TweetList tweets={tweetData} />}
+        {activeTab === "videos" ? (videoData.length > 0 ? <VideoGrid videos={videoData} /> : <div className="text-center">No More Video Found</div>) : <TweetList tweets={tweetData} />}
       </div>
     </div>
   );

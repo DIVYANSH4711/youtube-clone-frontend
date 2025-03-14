@@ -55,7 +55,7 @@ export default function Sidebar() {
       {/* Navigation */}
       <div className="w-full px-4 space-y-2 flex-grow">
         <NavItem to="/u/home" icon="home" text="Home" />
-        <NavItem to="/u/history" icon="time-past" text="History" />
+        <NavItem to="/u/watch-history" icon="time-past" text="History" />
         <NavItem to="/u/community" icon="population-globe" text="Community" />
         <NavItem to="/u/subscription" icon="channel" text="Subscriptions" />
         <NavItem to="/u/liked-videos" icon="likevideo" text="Liked Videos" />
