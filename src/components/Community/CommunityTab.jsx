@@ -33,43 +33,39 @@ const CommunityTab = () => {
     fetchTweets(selectedTab, 1);
   }, [selectedTab]);
 
+  
   const fetchTweets = async (type, page) => {
     try {
-      let username = JSON.parse(localStorage.getItem("user")).username
-      let url = "";
-      if (type === "global") url = `tweets/global?page=${page}`;
-      if (type === "personal") url = `tweets/user/${username}?page=${page}`;
-      if (type === "subscription") url = `tweets/user/following?page=${page}`;
+        let Id = JSON.parse(localStorage.getItem("user"))?._id;
+        let url = "";
 
-      const response = await axios.get(`${import.meta.env.VITE_API_URL}/${url}`, {
-        withCredentials: true,
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-        },
-      });
+        if (type === "global") url = `tweets/global?page=${page}`;
+        if (type === "personal") url = `tweets/user/${Id}?page=${page}`;
+        if (type === "subscription") url = `tweets/following?page=${page}`;
 
-      const tweets = response.data.data;
+        const response = await axios.get(`${import.meta.env.VITE_API_URL}/${url}`, {
+            withCredentials: true,
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+            },
+        });
 
-      if (tweets.length === 0) {
-        if (type === "global") setHasMoreGlobal(false);
-        if (type === "personal") setHasMorePersonal(false);
-        if (type === "subscription") setHasMoreSubscription(false);
-      }
+        const tweets = response.data?.data || []
 
-      if (type === "global") {
-        setGlobalTweets((prev) => (page === 1 ? tweets : [...prev, ...tweets]));
-        setPageGlobal(page);
-      } else if (type === "personal") {
-        setPersonalTweets((prev) => (page === 1 ? tweets : [...prev, ...tweets]));
-        setPagePersonal(page);
-      } else if (type === "subscription") {
-        setSubscriptionTweets((prev) => (page === 1 ? tweets : [...prev, ...tweets]));
-        setPageSubscription(page);
-      }
+        if (tweets.length === 0) {
+            if (type === "global") setHasMoreGlobal(false);
+            if (type === "personal") setHasMorePersonal(false);
+            if (type === "subscription") setHasMoreSubscription(false);
+        }
+
+        if (type === "global") setGlobalTweets((prev) => (page === 1 ? tweets : [...prev, ...tweets]));
+        if (type === "personal") setPersonalTweets((prev) => (page === 1 ? tweets : [...prev, ...tweets]));
+        if (type === "subscription") setSubscriptionTweets((prev) => (page === 1 ? tweets : [...prev, ...tweets]));
+        
     } catch (error) {
-      console.error(`Error fetching ${type} tweets:`, error);
+        console.error(`Error fetching ${type} tweets:`, error);
     }
-  };
+};
 
   const loadMoreTweets = () => {
     if (selectedTab === "global") {

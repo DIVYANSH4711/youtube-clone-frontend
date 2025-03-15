@@ -7,7 +7,7 @@ export default function VideoCard({
   title,
   owner,
   views,
-  likes,
+  likes = null,
   createdAt,
   channelAvatarUrl
 }) {
@@ -92,7 +92,7 @@ export default function VideoCard({
             }
 
             <p className="text-zinc-500 text-xs">
-              {formattedViews} views • {timeAgo(createdAt)} • {likes} likes
+              {formattedViews} views • {timeAgo(createdAt)}
             </p>
           </div>
         </div>
