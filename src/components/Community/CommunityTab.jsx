@@ -37,7 +37,7 @@ const CommunityTab = ({ username }) => {
     try {
       let url = "";
       if (type === "global") url = `tweets/global?page=${page}`;
-      if (type === "personal") url = `tweets/user/me?page=${page}`;
+      if (type === "personal") url = `tweets/user/${username}?page=${page}`;
       if (type === "subscription") url = `tweets/user/following?page=${page}`;
 
       const response = await axios.get(`${import.meta.env.VITE_API_URL}/${url}`, {
