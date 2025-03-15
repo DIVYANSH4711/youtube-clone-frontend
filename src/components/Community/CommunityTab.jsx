@@ -12,7 +12,7 @@ const PlusIcon = () => (
   </svg>
 );
 
-const CommunityTab = ({ username }) => {
+const CommunityTab = () => {
   const [isAddTweetOpen, setIsAddTweetOpen] = useState(false);
   const [newTweetContent, setNewTweetContent] = useState("");
   const [selectedTab, setSelectedTab] = useState("global");
@@ -35,6 +35,7 @@ const CommunityTab = ({ username }) => {
 
   const fetchTweets = async (type, page) => {
     try {
+      let username = JSON.parse(localStorage.getItem("user")).username
       let url = "";
       if (type === "global") url = `tweets/global?page=${page}`;
       if (type === "personal") url = `tweets/user/${username}?page=${page}`;

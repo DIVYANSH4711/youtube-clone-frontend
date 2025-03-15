@@ -1,35 +1,39 @@
 import { Link } from "react-router-dom";
-import { useState } from "react";
-
-const mockChannels = [
-  {
-    id: 1,
-    name: "Tech Insights",
-    subscribers: "1.2M",
-    avatar: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b",
-    description: "Latest tech reviews and insights",
-  },
-  {
-    id: 2,
-    name: "Code Masters",
-    subscribers: "850K",
-    avatar: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6",
-    description: "Programming tutorials and coding challenges",
-  },
-  {
-    id: 3,
-    name: "Digital Creators",
-    subscribers: "2.1M",
-    avatar: "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d",
-    description: "Digital content creation and tips",
-  },
-];
-
+import { useState, useEffect } from "react";
+import axios from 'axios'
 const Subscriptions = () => {
-  const [channels, setChannels] = useState(mockChannels);
+  const [channel, setChannel] = useState([]);
+  const Id = JSON.parse(localStorage.getItem("user"))._id
+  const [page, setPage] = useState(1)
+  const [hasMore, setHasMore] = useState(true)
+  useEffect(async () => {
+    try {
+      const response = await axios.get(
+        `${import.meta.env.VITE_API_URL}/subscriptions/c/${Id}?page=${page}`,
+        {
+          withCredentials: true,
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("accessToken")}`
+          }
+        }
+      )
+
+
+      if (!response.data || !response.data.data)
+        throw new Error("Some Error Occurred While retrieving The Subscribed Channels")
+
+      if (response.data.data.length === 0)
+          setHasMore(false)
+
+      setChannel([...channel, ...response.data.data])
+      setPage((prev) => prev + 1)
+    } catch (error) {
+      console.log(error)
+    }
+  }, [page])
 
   const handleUnsubscribe = (id) => {
-    setChannels(channels.filter((channel) => channel.id !== id));
+    setChannel(channel.filter((channel) => channel.id !== id));
   };
 
   return (
@@ -42,10 +46,10 @@ const Subscriptions = () => {
 
         {/* Channels List */}
         <div className="space-y-4">
-          {channels.length === 0 ? (
+          {channel.length === 0 ? (
             <p className="text-gray-400 text-center">You have no subscribed channels.</p>
           ) : (
-            channels.map((channel, index) => (
+            channel.map((channel, index) => (
               <div
                 key={channel.id}
                 className={`rounded-sm p-5 border-2 border-zinc-200 flex items-start gap-6 transition-all hover:scale-[1.02] duration-300 ${
@@ -53,7 +57,7 @@ const Subscriptions = () => {
                 }`}
               >
                 {/* Channel Avatar */}
-                <img src={channel.avatar} alt={channel.name} className="w-16 h-16 rounded-full cursor-pointer object-cover" />
+                <img src={channel.avatar} alt={channel.fullName} className="w-16 h-16 rounded-full cursor-pointer object-cover" />
 
                 <div className="flex-1">
                   <div className="flex items-center justify-between">
@@ -77,6 +81,9 @@ const Subscriptions = () => {
             ))
           )}
         </div>
+      </div>
+      <div className="mt-2 p-2 bg-zinc-100 border-blue-400 rounded-sm ">
+        <button>Load More</button>
       </div>
     </div>
   );
