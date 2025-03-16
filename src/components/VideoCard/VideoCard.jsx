@@ -68,7 +68,7 @@ export default function VideoCard({
           {/* Channel Avatar */}
           {
             channelAvatarUrl ?
-              (<NavLink to={`/u/channel/${owner.username}`} className="flex-shrink-0">
+              (<NavLink to={`/u/channel/${ownerUsername}`} className="flex-shrink-0">
                 <img
                   src={channelAvatarUrl || "/man.gif"}
                   alt={owner}
