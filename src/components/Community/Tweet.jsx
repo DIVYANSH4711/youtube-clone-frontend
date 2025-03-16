@@ -1,6 +1,7 @@
 import { useState } from "react";
 import formatDate from "../../Utilities/dateFomatter";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 const Tweet = ({ tweetId, author, content, timestamp, likes, avatar, isLiked: initialIsLiked }) => {
   const [isLiked, setIsLiked] = useState(initialIsLiked); // Initialize from backend
@@ -37,7 +38,7 @@ const Tweet = ({ tweetId, author, content, timestamp, likes, avatar, isLiked: in
         <div className="flex-1 min-w-0">
           {/* Author & Timestamp */}
           <div className="flex items-center space-x-2">
-            <h3 className="font-medium text-white truncate">{author}</h3>
+            <Link to={`/u/channel/${author}`}><h3 className="font-medium text-white truncate">{author}</h3></Link>
             <span className="text-sm text-gray-400">{formatDate(timestamp)}</span>
           </div>
 
