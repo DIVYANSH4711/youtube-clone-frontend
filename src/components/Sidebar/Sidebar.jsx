@@ -45,7 +45,7 @@ export default function Sidebar() {
       <div className="w-5/6">
         <div className="w-full flex justify-center items-center bg-zinc-800 border border-gray-600 text-white text-sm py-2 rounded-full shadow-md hover:scale-105 transition-transform cursor-pointer">
           <img src="/plus.svg" alt="upload" className="h-5 invert" />
-          <span className="ml-2">UPLOAD</span>
+          <NavLink to={"/u/upload"} className="ml-2">UPLOAD</NavLink>
         </div>
       </div>
 

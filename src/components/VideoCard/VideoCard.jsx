@@ -1,6 +1,5 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-
 export default function VideoCard({
   _id,
   thumbnail,
@@ -17,6 +16,7 @@ export default function VideoCard({
     ? new Intl.NumberFormat("en-US", { notation: "compact" }).format(views)
     : "—";
   function timeAgo(date) {
+    console.log(date)
     if (!date) return "—";
     const seconds = Math.floor((new Date() - new Date(date)) / 1000);
     const intervals = [

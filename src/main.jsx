@@ -14,6 +14,7 @@ import Register from "./components/Authentication/Register.jsx";
 import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute.jsx";
 import WatchHistory from "./components/WatchHistory/WatchHistory.jsx";
 import ByPass from "./Utilities/ByPass.jsx"
+import UploadVideo from "./components/uploadVideo/uploadVideo.jsx";
 
 const router = createBrowserRouter([
   {
@@ -35,6 +36,7 @@ const router = createBrowserRouter([
           { path: "video/:id", element: <VideoPage /> },
           { path: "subscription", element: <Subscriptions /> },
           { path: "community", element: <CommunityTab /> },
+          { path: "upload", element: <UploadVideo /> },
           { path: "channel/:username", element: <Channel /> },
           { path: "liked-videos", element: <LikeVideo /> },
           { path: "watch-history", element: <WatchHistory /> },

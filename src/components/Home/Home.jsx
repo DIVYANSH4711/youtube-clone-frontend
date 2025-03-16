@@ -11,7 +11,7 @@ export default function Home() {
    const fetchSuggestedVideos = async () => {
       try {
          const response = await axios.get(
-            `${import.meta.env.VITE_API_URL}/videos/suggestion`,
+            `${import.meta.env.VITE_API_URL}/videos/suggestion/me`,
             {
                withCredentials: true,
                headers: {
@@ -54,6 +54,7 @@ export default function Home() {
                        _id={video._id}
                        title={video.title}
                        createdAt={video.createdAt}
+                       views={video.views}
                        thumbnail={video.thumbnail}
                        owner={video.owner?.fullName}
                        channelAvatarUrl={video.owner?.avatar}

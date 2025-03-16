@@ -57,7 +57,7 @@ export default function likeVideo() {
             </div>
 
             <div className='flex justify-center items-center mt-3'>
-               <button className='p-1 rounded-sm bg-cyan-700 text-black'
+               <button className='px-6 py-2 bg-blue-500 cursor-pointer text-white rounded-md hover:bg-blue-600 transition'
                onClick={ () => setPage((prev)=>prev+1) }>Load More</button>
             </div>
          </main>

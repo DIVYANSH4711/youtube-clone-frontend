@@ -21,7 +21,7 @@
               thumbnail={video.thumbnail}
               title={video.title}
               views={video.views}
-              uploadDate={video.uploadDate}
+              createdAt={video.createdAt}
               likes={video.likes}
             />
           )) 
