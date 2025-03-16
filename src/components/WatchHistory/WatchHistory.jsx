@@ -54,6 +54,7 @@ export default function WatchHistory() {
                   title={video.title}
                   owner={video.owner?.fullName}
                   views={video.views}
+                  ownerUsername={video.owner?.username}
                   createdAt={video.createdAt}
                   thumbnail={video.thumbnail}
                   channelAvatarUrl={video.owner?.avatar}

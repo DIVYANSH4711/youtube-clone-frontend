@@ -49,6 +49,7 @@ export default function likeVideo() {
                            owner={video.owner?.fullName}
                            views={video.views}
                            createdAt={video.createdAt}
+                           ownerUsername={video.owner?.username}
                            thumbnail={video.thumbnail}
                            channelAvatarUrl={video.owner?.avatar}
                         />

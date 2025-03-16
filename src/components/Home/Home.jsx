@@ -57,6 +57,7 @@ export default function Home() {
                        views={video.views}
                        thumbnail={video.thumbnail}
                        owner={video.owner?.fullName}
+                       ownerUsername={video.owner?.username}
                        channelAvatarUrl={video.owner?.avatar}
                     />
                  ))}

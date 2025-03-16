@@ -8,6 +8,7 @@ export default function VideoCard({
   views,
   likes = null,
   createdAt,
+  ownerUsername,
   channelAvatarUrl
 }) {
   const isLoading = !_id;
@@ -86,7 +87,7 @@ export default function VideoCard({
 
             {
               owner ?
-                (<NavLink to={`/u/channel/${owner}`} className="text-zinc-400 text-sm hover:underline cursor-pointer">
+                (<NavLink to={`/u/channel/${ownerUsername}`} className="text-zinc-400 text-sm hover:underline cursor-pointer">
                   {owner}
                 </NavLink>) : null
             }
