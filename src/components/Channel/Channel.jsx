@@ -12,6 +12,7 @@ export default function Channel() {
   const [isSubscribed, setIsSubscribed] = useState(false);
   const params = useParams();
   const username = params.username;
+  
   const fetchChannelData = async () => {
     try {
       const response = await axios.get(
