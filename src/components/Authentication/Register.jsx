@@ -107,6 +107,7 @@ export default function Register() {
                   />
 
                   {/* Custom File Input for Avatar */}
+                     {/* <label htmlFor="avatarUpload" className="chakra-petch-regular text-white font-extrabold mb-1">Avatar - *Required</label> */}
                   <div className="w-full relative">
                      <input
                         type="file"
@@ -117,17 +118,17 @@ export default function Register() {
                         className="hidden"
                         id="avatarUpload"
                      />
-                     <select name="avatar" id=""></select>
                      <label
                         htmlFor="avatarUpload"
                         className="cursor-pointer flex justify-between items-center bg-gray-800 text-white px-4 py-2 border border-gray-600 rounded-md"
                      >
                         <span>{avatarName}</span>
-                        <span className="bg-cyan-900 text-white px-3 py-1 rounded-md">Choose File</span>
+                        <span className="bg-cyan-900 text-white px-3 py-1 rounded-md">Avatar</span>
                      </label>
                   </div>
 
                   {/* Custom File Input for Cover Image (Optional) */}
+                  
                   <div className="w-full relative">
                      <input
                         type="file"
@@ -142,7 +143,7 @@ export default function Register() {
                         className="cursor-pointer flex justify-between items-center bg-gray-800 text-white px-4 py-2 border border-gray-600 rounded-md"
                      >
                         <span>{coverImageName}</span>
-                        <span className="bg-cyan-900 text-white px-3 py-1 rounded-md">Choose File</span>
+                        <span className="bg-cyan-900 text-white px-3 py-1 rounded-md">CoverImage</span>
                      </label>
                   </div>
 
