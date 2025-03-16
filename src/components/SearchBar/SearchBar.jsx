@@ -6,6 +6,7 @@ const SearchBar = ({ onSearch, placeholder = "Search..." }) => {
       {/* Input Field */}
       <input
         type="text"
+        onClick={()=> alert("Not Working for Now")}
         className="w-full bg-transparent px-8  text-white placeholder-gray-400 outline-none"
         placeholder={placeholder}
       />
@@ -13,7 +14,8 @@ const SearchBar = ({ onSearch, placeholder = "Search..." }) => {
       {/* Search Button */}
       <button
         type="submit"
-        onClick={onSearch}
+        onClick={()=> alert("Not working for now")}
+        disabled={true}
         className="bg-white text-white p-3 rounded-r-full transition-all"
       >
         <img src="/search.svg" alt="search" className="h-5" />
