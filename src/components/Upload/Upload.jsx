@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 
-const UploadVideo = () => {
+const Upload = () => {
    const [title, setTitle] = useState("");
    const [description, setDescription] = useState("");
    const [videoFile, setVideoFile] = useState(null);
@@ -142,4 +142,4 @@ const UploadVideo = () => {
    );
 };
 
-export default UploadVideo;
+export default Upload;
