@@ -14,7 +14,7 @@ import Register from "./components/Authentication/Register.jsx";
 import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute.jsx";
 import WatchHistory from "./components/WatchHistory/WatchHistory.jsx";
 import ByPass from "./Utilities/ByPass.jsx"
-import UploadVideo from "./components/uploadVideo/uploadVideo.jsx";
+import UploadVideo from "./components/UploadVideo/UploadVideo.jsx";
 
 const router = createBrowserRouter([
   {
