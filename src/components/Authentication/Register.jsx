@@ -117,6 +117,7 @@ export default function Register() {
                         className="hidden"
                         id="avatarUpload"
                      />
+                     <select name="avatar" id=""></select>
                      <label
                         htmlFor="avatarUpload"
                         className="cursor-pointer flex justify-between items-center bg-gray-800 text-white px-4 py-2 border border-gray-600 rounded-md"
