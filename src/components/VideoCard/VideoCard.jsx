@@ -86,7 +86,7 @@ export default function VideoCard({
 
             {
               owner ?
-                (<NavLink to={`/u/channel/${owner.username}`} className="text-zinc-400 text-sm hover:underline cursor-pointer">
+                (<NavLink to={`/u/channel/${owner}`} className="text-zinc-400 text-sm hover:underline cursor-pointer">
                   {owner}
                 </NavLink>) : null
             }
